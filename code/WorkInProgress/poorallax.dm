@@ -79,5 +79,17 @@ var/datum/controller/parallax_controller/parallax_controller = new
 		pl.transform = matrix(1/src.scale, 0, -((PARALLAX_VIEW_WIDTH - 4 - 1/src.scale)/2)*32, 0, 1/src.scale, -((PARALLAX_VIEW_HEIGHT - 4 - 1/src.scale)/2)*32)
 		return pl
 
+
+#ifdef PARALLAX_ENABLED
+/obj/effects/background_objects/New(loc)
+	..()
+	if(!isnull(loc))
+		var/obj/effect/parallax/parallax = parallax_controller.get_planet_parallax()
+		parallax.vis_contents += src
+		src.pixel_x = (src.x / parallax.scale + (PARALLAX_VIEW_WIDTH - 4)) * world.icon_size * parallax.scale
+		src.pixel_y = (src.y / parallax.scale + (PARALLAX_VIEW_HEIGHT - 4)) * world.icon_size * parallax.scale
+		src.set_loc(null)
+#endif
+
 #undef PARALLAX_VIEW_WIDTH
 #undef PARALLAX_VIEW_HEIGHT
