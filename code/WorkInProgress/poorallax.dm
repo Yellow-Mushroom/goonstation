@@ -55,6 +55,7 @@ var/datum/controller/parallax_controller/parallax_controller = new
 					var/turf/T = locate(min(world.maxx, x), min(world.maxy, y), 1)
 					var/obj/effect/anchor = new
 					anchor.mouse_opacity = FALSE
+					anchor.appearance_flags = PIXEL_SCALE | RESET_ALPHA | RESET_COLOR | RESET_TRANSFORM | KEEP_APART | TILE_BOUND
 					anchor.vis_contents += par
 					anchor.pixel_x = -(T.x - 1) * 32 // aligns the "anchor objects"
 					anchor.pixel_y = -(T.y - 1) * 32
