@@ -169,7 +169,7 @@
 	icon_state = "placeholder"
 #endif
 	fullbright = 1
-#ifndef HALLOWEEN
+#if !defined(HALLOWEEN) && !defined(PARALLAX_ENABLED)
 	color = "#BBBBBB"
 #endif
 	temperature = TCMB
