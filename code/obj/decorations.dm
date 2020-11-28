@@ -603,16 +603,6 @@
 	plane = PLANE_SPACE
 #endif
 
-#ifdef PARALLAX_ENABLED
-	New(loc)
-		..()
-		if(!isnull(loc))
-			var/obj/effect/parallax/parallax = parallax_controller.get_planet_parallax()
-			parallax.vis_contents += src
-			src.pixel_x = src.x * world.icon_size * parallax.scale
-			src.pixel_y = src.y * world.icon_size * parallax.scale
-			src.set_loc(null)
-#endif
 	x3
 		icon_state = "moon-green"
 		name = "X3"
