@@ -39,6 +39,9 @@
 // all this does is set the z-level to be ignored by erebite explosion admin log messages
 // if you want to see all erebite explosions set this to 0 or -1 or something
 
+// Whether we have fancy but client-performance-heavy parallax or not
+#define PARALLAX_ENABLED
+
 // gameticker
 #define GAME_STATE_WORLD_INIT	1
 #define GAME_STATE_PREGAME		2
