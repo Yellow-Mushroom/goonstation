@@ -412,6 +412,11 @@ var/f_color_selector_handler/F_Color_Selector
 		Z_LOG_DEBUG("Preload", "  zoldorf")
 		zoldorfsetup()
 
+		#ifdef PARALLAX_ENABLED
+		Z_LOG_DEBUG("Preload", "  initialize parallax")
+		parallax_controller.initialize(FALSE)
+		#endif
+
 		Z_LOG_DEBUG("Preload", "Preload stage complete")
 		..()
 

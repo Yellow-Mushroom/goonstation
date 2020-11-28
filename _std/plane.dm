@@ -15,6 +15,8 @@
 #define PLANE_HUD 30
 #define PLANE_SCREEN_OVERLAYS 40
 
+#define PLANE_PARALLAX_PLANET (PLANE_SPACE - 1)  // the closest parallax plane (planets are here)
+
 /obj/screen/plane_parent
 	name = ""
 	icon = null
@@ -79,6 +81,10 @@ client
 	New()
 		Z_LOG_DEBUG("Cient/New", "[src.ckey] - Adding plane_parents")
 		plane_parents += new /obj/screen/plane_parent(PLANE_UNDERFLOOR, name = "underfloor_plane")
+#ifdef PARALLAX_ENABLED
+		for(var/obj/effect/parallax/parallax in parallax_controller.parallax_objects)
+			plane_parents += parallax.make_parallax_plane()
+#endif
 		plane_parents += new /obj/screen/plane_parent(PLANE_SPACE, name = "space_plane")
 		plane_parents += new /obj/screen/plane_parent(PLANE_FLOOR, name = "floor_plane")
 		plane_parents += new /obj/screen/plane_parent(PLANE_WALL, name = "wall_plane")

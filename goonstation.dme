@@ -1642,6 +1642,7 @@ var/datum/preMapLoad/preMapLoad = new
 #include "code\WorkInProgress\pali.dm"
 #include "code\WorkInProgress\Particles.dm"
 #include "code\WorkInProgress\PlanetCrashEvent.dm"
+#include "code\WorkInProgress\poorallax.dm"
 #include "code\WorkInProgress\previouslyKeelinsStuff.dm"
 #include "code\WorkInProgress\racing.dm"
 #include "code\WorkInProgress\Railgun.dm"

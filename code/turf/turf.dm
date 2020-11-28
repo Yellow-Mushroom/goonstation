@@ -163,7 +163,11 @@
 /turf/space
 	icon = 'icons/turf/space.dmi'
 	name = "\proper space"
+#ifdef PARALLAX_ENABLED
+	icon_state = ""
+#else
 	icon_state = "placeholder"
+#endif
 	fullbright = 1
 #ifndef HALLOWEEN
 	color = "#BBBBBB"
