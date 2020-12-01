@@ -200,13 +200,6 @@
 		if (has_aH)
 			if (AHLIMB.mob_appearance_flags & HAS_NO_SKINTONE)
 				skin_tone = "#FFFFFF"
-			else if (AHLIMB.mob_appearance_flags & HAS_SPECIAL_SKINTONE)
-				if (AHLIMB.mob_color_flags & SKINTONE_USES_PREF_COLOR_1)
-					skin_tone = AHLIMB.customization_first_color
-				else if (AHLIMB.mob_color_flags & SKINTONE_USES_PREF_COLOR_2)
-					skin_tone = AHLIMB.customization_second_color
-				else if (AHLIMB.mob_color_flags & SKINTONE_USES_PREF_COLOR_3)
-					skin_tone = AHLIMB.customization_third_color
 			else
 				skin_tone = AHLIMB.s_tone
 		else	// This is going to look *weird* if these somehow spawn on a mob
@@ -1310,17 +1303,12 @@ obj/item/parts/human_parts/arm/right/reliquary
 	slot = "l_arm"
 	side = "left"
 	handlistPart = "hand_left"
-	decomp_affected = 0
 	skintoned = 0
 
 	New(var/atom/holder)
 		if (holder != null)
 			set_loc(holder)
 		..()
-
-	getMobIcon(var/lying, var/decomp_stage = 0)
-		src.standImage = image(src.partIcon, "[src.slot]")
-		return standImage
 
 /obj/item/parts/human_parts/leg/mutant
 	name = "left mutant leg!"
@@ -1338,10 +1326,6 @@ obj/item/parts/human_parts/arm/right/reliquary
 		if (holder != null)
 			set_loc(holder)
 		..()
-
-	getMobIcon(var/lying, var/decomp_stage = 0)
-		src.standImage = image(src.partIcon, "[src.slot]")
-		return standImage
 
 //// COW LIMBS ////
 ///// PARENT  /////
