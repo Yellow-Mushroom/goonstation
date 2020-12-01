@@ -194,7 +194,7 @@
 				colorheck = AHead.customization_second_color
 			if(CUST_3)
 				colorheck = AHead.customization_third_color
-			if(NO_CUST)
+			else
 				colorheck = "#FFFFFF"
 		src.head_image_special_one.color = colorheck
 		switch(AHead.special_hair_2_color_ref)
@@ -204,7 +204,7 @@
 				colorheck = AHead.customization_second_color
 			if(CUST_3)
 				colorheck = AHead.customization_third_color
-			if(NO_CUST)
+			else
 				colorheck = "#FFFFFF"
 		src.head_image_special_two.color = colorheck
 		switch(AHead.special_hair_3_color_ref)
@@ -214,7 +214,7 @@
 				colorheck = AHead.customization_second_color
 			if(CUST_3)
 				colorheck = AHead.customization_third_color
-			if(NO_CUST)
+			else
 				colorheck = "#FFFFFF"
 		src.head_image_special_three.color = colorheck
 
@@ -229,9 +229,14 @@
 
 		src.overlays += src.head_image
 		src.overlays += src.head_image_eyes
-		src.overlays += src.head_image_cust_one
-		src.overlays += src.head_image_cust_two
-		src.overlays += src.head_image_cust_three
+		if(src.donor_appearance?.mob_appearance_flags & HAS_HUMAN_HAIR)
+			src.overlays += src.head_image_cust_one
+			src.overlays += src.head_image_cust_two
+			src.overlays += src.head_image_cust_three
+		if(src.donor_appearance?.mob_appearance_flags & HAS_SPECIAL_HAIR)
+			src.overlays += src.head_image_special_one
+			src.overlays += src.head_image_special_two
+			src.overlays += src.head_image_special_three
 
 		if (src.glasses && src.glasses.wear_image_icon)
 			src.overlays += image(src.glasses.wear_image_icon, src.glasses.icon_state)
