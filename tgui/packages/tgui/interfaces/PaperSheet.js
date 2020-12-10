@@ -202,7 +202,7 @@ const Stamp = (props, context) => {
         id={activeStamp && "stamp"}
         style={stampTransform}
         className="paper__stamp"
-        src={resolveAsset(image.url)}
+        src={resolveAsset(image.sprite)}
       />
     )
       : (
@@ -345,13 +345,11 @@ class PaperSheetStamper extends Component {
     const {
       value,
       stampClass,
-      stampUrl,
       stamps,
     } = this.props;
     const stampList = stamps || [];
     const currentPos = {
       sprite: stampClass,
-      url: stampUrl,
       x: this.state.x,
       y: this.state.y,
       rotate: this.state.rotate,
@@ -575,7 +573,6 @@ export const PaperSheet = (props, context) => {
     penFont = "Verdana",
     stamps,
     stampClass,
-    stampUrl,
     sizeX,
     sizeY,
     name,
@@ -606,8 +603,7 @@ export const PaperSheet = (props, context) => {
           <PaperSheetStamper
             value={text}
             stamps={stampList}
-            stampClass={stampClass}
-            stampUrl={stampUrl} />
+            stampClass={stampClass} />
         );
       default:
         return "ERROR ERROR WE CANNOT BE HERE!!";
