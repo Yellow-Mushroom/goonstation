@@ -268,24 +268,7 @@
 	var/T = ""
 	T = time_type + ": [time2text(ticker.round_elapsed_ticks, "hh:mm:ss")]"
 
-	// TODO: change this awful array name & stampAssetType
-	var/stamp_assets = list(
-		"stamp-sprite-clown" = "large_stamp-clown.png",
-		"stamp-sprite-deny" = "large_stamp-deny.png",
-		"stamp-sprite-ok" = "large_stamp-ok.png",
-		"stamp-sprite-hop" = "large_stamp-hop.png",
-		"stamp-sprite-md" = "large_stamp-md.png",
-		"stamp-sprite-ce" = "large_stamp-ce.png",
-		"stamp-sprite-hos" = "large_stamp-hos.png",
-		"stamp-sprite-rd" = "large_stamp-rd.png",
-		"stamp-sprite-cap" = "large_stamp-cap.png",
-		"stamp-sprite-qm" = "large_stamp-qm.png",
-		"stamp-sprite-law" = "large_stamp-law.png",
-		"stamp-sprite-chap" = "large_stamp-chap.png",
-		"stamp-sprite-mime" = "large_stamp-mime.png",
-		"stamp-sprite-centcom" = "large_stamp-centcom.png",
-		"stamp-sprite-syndicate" = "large_stamp-syndicate.png",
-		"stamp-sprite-void" = "large_stamp-void.png",
+	var/stamp_special_assets = list(
 		"stamp-text-time" =  T,
 		"stamp-text-name" = user.name
 	)
@@ -299,8 +282,22 @@
 		data["stampClass"] = "FAKE"
 	else if(istype(O, /obj/item/stamp))
 		var/obj/item/stamp/stamp = O
-		data["stampClass"] = stamp_assets[stamp.current_mode]
-		stamp.current_state = stamp_assets[stamp.current_mode]
+		var/data_for_stamp = ""
+		var/url_for_stamp = ""
+
+		// Determine if we use a url for image or special text
+		if (stamp.current_mode in stamp_special_assets) // Set to special
+			data_for_stamp = stamp_special_assets[stamp.current_mode]
+			url_for_stamp = stamp_special_assets[stamp.current_mode]
+		else //url time
+			data_for_stamp = stamp.current_mode
+			var/datum/asset/basic/paper/ass = get_assets(/datum/asset/basic/paper/)
+			var/url_map = ass.get_associated_urls()
+			url_for_stamp = url_map[stamp.current_mode]
+
+		data["stampUrl"] = url_for_stamp
+		data["stampClass"] = data_for_stamp
+		stamp.current_state = data_for_stamp
 		data["editMode"] = PAPER_MODE_STAMPING
 		data["penFont"] = "FAKE"
 		data["penColor"] = "FAKE"
@@ -1073,7 +1070,7 @@ Only trained personnel should operate station systems. Follow all procedures car
 	var/is_reassignable = 1
 	var/assignment = null
 	var/available_modes = list("Granted", "Denied", "Void", "Current Time", "Your Name");
-	var/current_mode = "stamp-sprite-ok"
+	var/current_mode = "stamp-ok"
 	var/current_state = null
 
 /obj/item/stamp/New()
